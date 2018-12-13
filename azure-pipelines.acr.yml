@@ -14,6 +14,9 @@ steps:
     docker build -f Dockerfile -t $(dockerId).azurecr.io/$(imageName) .
     docker login -u $(dockerId) -p $pswd $(dockerId).azurecr.io
     docker push $(dockerId).azurecr.io/$(imageName)
+    docker-compose -f docs/docker-compose.yml --project-directory . -p docs up -d
+    docker wait docs_sut_1
+    docker-compose -f docs/docker-compose.yml --project-directory . down
   env:
     pswd: $(dockerPassword)
 
