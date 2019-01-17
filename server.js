@@ -12,6 +12,17 @@ app.get('/', (req, res) => {
   res.send('Hello Node.js Sample!\n');
 });
 
+var obj = {
+ x : 5,
+ y: 7
+};
+
+var resStr = JSON.stringify(obj);
+
+app.get('/test', (req, res) => {
+  res.send(resStr);
+});
+
 var port = process.env.PORT||PORT;
 app.listen(port);
 console.log(`Running on http://${HOST}:${PORT}`);
