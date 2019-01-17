@@ -8,9 +8,6 @@ const HOST = '0.0.0.0';
 
 // App
 const app = express();
-app.get('/', (req, res) => {
-  res.send('Hello Node.js Sample!\n');
-});
 
 var obj = {
  x : 5,
@@ -20,8 +17,15 @@ var obj = {
 var resStr = JSON.stringify(obj);
 
 app.get('/test', (req, res) => {
+  console.log('/test called');
   res.send(resStr);
 });
+
+app.get('/', (req, res) => {
+    console.log('/ called');
+    res.send('Hello Node.js Sample!\n');
+});
+
 
 var port = process.env.PORT||PORT;
 app.listen(port);
