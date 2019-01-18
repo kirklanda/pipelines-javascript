@@ -8,6 +8,7 @@ const HOST = '0.0.0.0';
 
 // App
 const app = express();
+var router = express.Router();
 
 var obj = {
  x : 5,
@@ -16,15 +17,21 @@ var obj = {
 
 var resStr = JSON.stringify(obj);
 
-app.get('/test', (req, res) => {
+router.get('/', (req, res) => {
+  res.send('Main page');
+});
+
+router.get('/test', (req, res) => {
   console.log('/test called');
   res.send(resStr);
 });
 
-app.get('/', (req, res) => {
-    console.log('/ called');
-    res.send('Hello Node.js Sample!\n');
-});
+router.get('/about', (req, res) => {
+    res.send('Simple API examples using ExpressJS');
+})
+
+// mount the router on the app
+app.use('/', router);
 
 
 var port = process.env.PORT||PORT;
